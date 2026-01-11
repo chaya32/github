@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List - Student Management System</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <!-- TOP NAVBAR -->
+    <header class="navbar">
+        <div class="nav-container">
+            <h1>📚 Student Management System</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'students_list' %}" class="active">Students</a></li>
+                    <li><a href="{% url 'courses_list' %}">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <div class="page-header">
+            <h2>Students List</h2>
+            <p class="subtitle">Manage all registered students</p>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div style="margin-bottom: 30px; text-align: right;">
+            <a href="{% url 'add_student' %}" class="button">+ Add New Student</a>
+            <a href="{% url 'dashboard' %}" class="button" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin-left: 10px;">Back to Dashboard</a>
+        </div>
+
+        {% if students %}
+        <!-- STUDENTS TABLE -->
+        <div style="background: white; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); overflow: hidden;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Course</th>
+                        <th>Enrolled Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>#{{ student.id }}</td>
+                        <td><strong>{{ student.full_name }}</strong></td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.age }}</td>
+                        <td><span style="background-color: #667eea; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">{{ student.course.name }}</span></td>
+                        <td>{{ student.created_at|date:"M d, Y" }}</td>
+                        <td>
+                            <a href="{% url 'student_detail' student.id %}" class="button" style="padding: 8px 15px; font-size: 12px; background: #667eea; text-decoration: none; display: inline-block;">View</a>
+                            <a href="{% url 'update_student' student.id %}" class="button" style="padding: 8px 15px; font-size: 12px; background: #48bb78; text-decoration: none; display: inline-block; margin-left: 5px;">Edit</a>
+                            <a href="{% url 'delete_student' student.id %}" class="button" style="padding: 8px 15px; font-size: 12px; background: #f56565; text-decoration: none; display: inline-block; margin-left: 5px;" onclick="return confirm('Are you sure?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px; background: #f7fafc; border-radius: 8px; border-left: 4px solid #667eea;">
+            <strong>Total Students:</strong> {{ students|length }}
+        </div>
+        {% else %}
+        <div style="background: white; border-radius: 12px; padding: 40px; text-align: center; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
+            <p style="font-size: 18px; color: #666; margin-bottom: 20px;">No students found. Start by adding a new student.</p>
+            <a href="{% url 'add_student' %}" class="button">+ Add First Student</a>
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2026 Student Management System. All rights reserved. | Built with Django</p>
+    </footer>
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>

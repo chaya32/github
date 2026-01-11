@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Course</title>
+
+<style>
+/* ===== CSS (GREEN & WHITE THEME) ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4fff4;
+    color: #1b5e20;
+    animation: fadeIn 1s ease-in;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: slideUp 0.8s ease;
+}
+
+h2 {
+    text-align: center;
+    color: #2e7d32;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1b5e20;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #e8f5e9;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Management System</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Add Course</h2>
+
+        <input type="text" id="courseName" placeholder="Course Name">
+        <input type="text" id="duration" placeholder="Course Duration">
+
+        <button onclick="addCourse()">Add Course</button>
+
+        <h3>Course List</h3>
+        <ul id="courseList">
+            <li>No courses added yet</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+/* ===== JAVASCRIPT LOGIC ===== */
+
+let courses = [];
+
+function addCourse() {
+    let name = document.getElementById("courseName").value;
+    let duration = document.getElementById("duration").value;
+
+    if (name === "" || duration === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let course = { name, duration };
+    courses.push(course);
+
+    displayCourses();
+
+    document.getElementById("courseName").value = "";
+    document.getElementById("duration").value = "";
+}
+
+function displayCourses() {
+    let list = document.getElementById("courseList");
+    list.innerHTML = "";
+
+    courses.forEach(c => {
+        list.innerHTML += `
+            <li>
+                <strong>${c.name}</strong><br>
+                Duration: ${c.duration}
+            </li>
+        `;
+    });
+}
+</script>
+
+</body>
+</html>

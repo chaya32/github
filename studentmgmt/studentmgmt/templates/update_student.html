@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Update Student</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4fff4;
+    color:#1b5e20;
+    animation:fadeIn 1s ease-in;
+}
+header{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+.container{
+    display:flex;
+    justify-content:center;
+    margin-top:40px;
+}
+.card{
+    background:white;
+    padding:25px;
+    width:420px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    animation:slideUp 0.8s ease;
+}
+h2{text-align:center;color:#2e7d32;}
+input,select,button{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+button{
+    background:#2e7d32;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+button:hover{background:#1b5e20;}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Student Management System</h1>
+</header>
+
+<div class="container">
+<div class="card">
+<h2>Update Student</h2>
+
+<input type="text" id="name" value="John Doe">
+<input type="email" id="email" value="john@gmail.com">
+
+<select>
+<option>Python</option>
+<option>Django</option>
+<option>Web Development</option>
+</select>
+
+<button onclick="updateStudent()">Update Student</button>
+</div>
+</div>
+
+<script>
+function updateStudent(){
+    alert("Student updated successfully!");
+    window.history.back();
+}
+</script>
+
+</body>
+</html>

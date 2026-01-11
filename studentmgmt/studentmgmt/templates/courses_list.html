@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Courses List</title>
+
+<style>
+/* ===== CSS (GREEN & WHITE THEME) ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4fff4;
+    color: #1b5e20;
+    animation: fadeIn 1s ease-in;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    width: 480px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: slideUp 0.8s ease;
+}
+
+h2 {
+    text-align: center;
+    color: #2e7d32;
+}
+
+a {
+    text-decoration: none;
+    color: #1b5e20;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #e8f5e9;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+li:hover {
+    transform: scale(1.02);
+    background: #c8e6c9;
+}
+
+.course-name {
+    font-weight: bold;
+}
+
+.course-duration {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1b5e20;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Management System</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Courses List</h2>
+
+        <ul id="courseList">
+            <!-- Courses added dynamically -->
+        </ul>
+
+        <button onclick="goToAddCourse()">Add New Course</button>
+    </div>
+</div>
+
+<script>
+/* ===== JAVASCRIPT LOGIC ===== */
+
+/*
+  Demo data.
+  In Django, this list will come from backend:
+  {% for course in courses %}
+*/
+
+let courses = [
+    { id: 1, name: "Python", duration: "3 Months" },
+    { id: 2, name: "Django", duration: "2 Months" },
+    { id: 3, name: "Web Development", duration: "4 Months" }
+];
+
+function displayCourses() {
+    let list = document.getElementById("courseList");
+    list.innerHTML = "";
+
+    courses.forEach(course => {
+        list.innerHTML += `
+            <li onclick="openCourse(${course.id})">
+                <div class="course-name">${course.name}</div>
+                <div class="course-duration">Duration: ${course.duration}</div>
+            </li>
+        `;
+    });
+}
+
+function openCourse(id) {
+    // Demo redirect
+    alert("Open course_detail.html for Course ID: " + id);
+
+    // Django example:
+    // window.location.href = "/courses/" + id + "/";
+}
+
+function goToAddCourse() {
+    window.location.href = "add_course.html";
+}
+
+displayCourses();
+</script>
+
+</body>
+</html>

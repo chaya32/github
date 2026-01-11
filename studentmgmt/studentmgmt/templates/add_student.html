@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Student</title>
+
+<style>
+/* ===== CSS (GREEN & WHITE THEME) ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4fff4;
+    color: #1b5e20;
+    animation: fadeIn 1s ease-in;
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    width: 420px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: slideUp 0.8s ease;
+}
+
+h2 {
+    text-align: center;
+    color: #2e7d32;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1b5e20;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #e8f5e9;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Management System</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>Add Student</h2>
+
+        <input type="text" id="studentName" placeholder="Student Name">
+        <input type="email" id="studentEmail" placeholder="Email">
+
+        <select id="studentCourse">
+            <option value="">Select Course</option>
+            <option>Python</option>
+            <option>Django</option>
+            <option>Web Development</option>
+        </select>
+
+        <button onclick="addStudent()">Save Student</button>
+
+        <h3>Student List</h3>
+        <ul id="studentList">
+            <li>No students added yet</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+/* ===== JAVASCRIPT LOGIC ===== */
+
+let students = [];
+
+function addStudent() {
+    let name = document.getElementById("studentName").value;
+    let email = document.getElementById("studentEmail").value;
+    let course = document.getElementById("studentCourse").value;
+
+    if (name === "" || email === "" || course === "") {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let student = { name, email, course };
+    students.push(student);
+
+    displayStudents();
+
+    // Clear form
+    document.getElementById("studentName").value = "";
+    document.getElementById("studentEmail").value = "";
+    document.getElementById("studentCourse").value = "";
+}
+
+function displayStudents() {
+    let list = document.getElementById("studentList");
+    list.innerHTML = "";
+
+    students.forEach(s => {
+        list.innerHTML += `
+            <li>
+                <strong>${s.name}</strong><br>
+                ${s.email}<br>
+                Course: ${s.course}
+            </li>
+        `;
+    });
+}
+</script>
+
+</body>
+</html>
